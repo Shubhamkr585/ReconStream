@@ -26,13 +26,37 @@ spring:
     locations: classpath:db/migration
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:19092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
     consumer:
       group-id: reconstream-group
       auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   data:
     redis:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
+  ai:
+    model:
+      chat: google-genai
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY:test-dummy-gemini-key}
+        chat:
+          options:
+            model: gemini-2.5-flash
+        embedding:
+          api-key: ${GEMINI_API_KEY:test-dummy-gemini-key}
+          text:
+            options:
+              model: gemini-embedding-001
+              dimensions: 768
+
+reconstream:
+  webhook:
+    secret: ${WEBHOOK_SECRET:reconstream-psp-webhook-secret-key-2026}
 
 management:
   endpoints:

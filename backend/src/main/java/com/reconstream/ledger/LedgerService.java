@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -47,6 +48,11 @@ public class LedgerService {
         if (totalDebit != totalCredit || totalDebit == 0) {
             throw new UnbalancedJournalException(
                     String.format("Unbalanced journal: total DEBIT (%d) != total CREDIT (%d)", totalDebit, totalCredit));
+        }
+
+        Optional<JournalEntry> existing = journalEntryRepository.findByReferenceIdAndEventType(referenceId, eventType);
+        if (existing.isPresent()) {
+            return existing.get();
         }
 
         JournalEntry journalEntry = new JournalEntry(UUID.randomUUID(), referenceId, eventType);
