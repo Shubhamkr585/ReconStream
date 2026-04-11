@@ -1,0 +1,1 @@
+{"root":["./src/counter.ts","./src/main.ts","./src/vite-env.d.ts","./src/api/client.ts","./src/router/index.ts","./src/stores/auth.ts","./src/types/index.ts","./src/app.vue","./src/components/aicopilotdrawer.vue","./src/components/navbar.vue","./src/views/chaosview.vue","./src/views/ledgerview.vue","./src/views/loginview.vue","./src/views/overviewview.vue"],"version":"5.6.3"}
